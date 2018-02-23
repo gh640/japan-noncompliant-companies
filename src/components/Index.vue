@@ -74,6 +74,7 @@ export default {
           filterDropdown: true,
           filterOptions,
           placeholder: '管轄',
+          width: '12%',
         },
         {
           label: '名称',
@@ -81,6 +82,7 @@ export default {
           filterable: true,
           placeholder: '名称',
           filter: filterFunc,
+          width: '20%',
         },
         {
           label: '所在地',
@@ -95,6 +97,7 @@ export default {
           filterable: true,
           placeholder: '事案概要',
           filter: filterFunc,
+          width: '40%',
         },
       ],
       onClickFn(company) {
@@ -121,12 +124,12 @@ li {
 a {
   color: #42b983;
 }
-table {
+table.table {
 }
-th {
+table.table th {
   padding: 0.5em;
 }
-td {
+table.table td {
   padding: 0.5em;
 }
 </style>

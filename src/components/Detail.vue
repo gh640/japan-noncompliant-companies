@@ -49,7 +49,7 @@ export default {
   name: 'Detail',
   props: ['id'],
   watch: {
-    $route(to, from) {
+    $route() {
       this.companies = this.$root.companies;
       this.company = this.companies[this.id];
       this.matched = !!this.company;
