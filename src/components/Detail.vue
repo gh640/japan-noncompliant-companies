@@ -1,6 +1,22 @@
 <template>
   <div>
+    <div class="nav-next">
+      <router-link class="nav-next-prev"
+        v-if="companyPrevName"
+        v-bind:title="companyPrevName"
+        :to="{ name: 'Detail', params: { id: idPrev } }">
+        前
+      </router-link>
+      <router-link class="nav-next-next"
+        v-if="companyNextName"
+        v-bind:title="companyNextName"
+        :to="{ name: 'Detail', params: { id: idNext } }">
+        次
+      </router-link>
+    </div>
+
     <h1>{{ msg }}</h1>
+
     <table>
       <tr v-if="company"
         v-for="(column, index) in columns"
@@ -11,8 +27,9 @@
       </tr>
       <caption>公表日: {{ company['公表日'] }}</caption>
     </table>
+
     <div class="nav-index">
-      <router-link :to="{ name: 'Index' }">戻る</router-link>
+      <router-link :to="{ name: 'Index' }">一覧へ</router-link>
     </div>
   </div>
 </template>
@@ -20,11 +37,20 @@
 <script>
 export default {
   name: 'Detail',
-  filters: {
+  props: ['id'],
+  watch: {
+    '$route' (to, from) {
+      this.companies = this.$root.companies;
+      this.company = this.companies[this.id];
+    },
+  },
+  mounted() {
+    this.companies = this.$root.companies;
+    this.company = this.companies[this.id];
   },
   data() {
     return {
-      msg: '',
+      companies: [],
       company: {},
       columns: [
         '管轄',
@@ -35,9 +61,40 @@ export default {
       ],
     };
   },
-  mounted() {
-    this.company = this.$root.companies[this.$route.params.id];
-    this.msg = this.company['企業・事業場名称'];
+  computed: {
+    msg() {
+      return this.company['企業・事業場名称'];
+    },
+    idNext() {
+      const id = parseInt(this.id, 10);
+      return (id < this.companies.length - 1) ? parseInt(id, 10) + 1 : undefined;
+    },
+    idPrev() {
+      const id = parseInt(this.id, 10);
+      return (id > 0) ? parseInt(id, 10) - 1 : undefined;
+    },
+    companyNextName() {
+      if (this.idNext === undefined) {
+        return '';
+      }
+
+      if (!this.companies[this.idNext]) {
+        return '';
+      }
+
+      return this.companies[this.idNext]['企業・事業場名称'];
+    },
+    companyPrevName() {
+      if (this.idPrev === undefined) {
+        return '';
+      }
+
+      if (!this.companies[this.idPrev]) {
+        return '';
+      }
+
+      return this.companies[this.idPrev]['企業・事業場名称'];
+    },
   },
 };
 </script>
@@ -61,6 +118,15 @@ th {
 td {
   text-align: left;
   padding: 0.5em;
+}
+.nav-next {
+  overflow: hidden;
+}
+.nav-next-prev {
+  float: left;
+}
+.nav-next-next {
+  float: right;
 }
 .nav-index {
   margin: 20px 0;

@@ -18,6 +18,7 @@ export default new Router({
       path: '/company/:id',
       name: 'Detail',
       component: Detail,
+      props: true,
     },
   ],
 });
