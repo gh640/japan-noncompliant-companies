@@ -1,36 +1,39 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>管轄</th>
-          <th>企業・事業場名称</th>
-          <th>所在地</th>
-          <th>事案概要</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(company, index) in companies"
-          v-bind:key="index"
-          v-bind:class="{ odd: (index % 2 == 1) }">
-          <td> {{ company['管轄'] }} </td>
-          <td>
-            <router-link :to="{ name: 'Detail', params: { id: index } }">
-              {{ company['企業・事業場名称'] }}
-            </router-link>
-          </td>
-          <td> {{ company['所在地'] }} </td>
-          <td> {{ company['事案概要']|truncate(30) }} </td>
-        </tr>
-      </tbody>
-    </table>
+    <vue-good-table
+      :columns="columns"
+      :rows="companies"
+      :paginate="true"
+      :onClick="onClickFn"
+      styleClass="table table-bordered table-striped"
+      nextText="次"
+      prevText="前"
+      rowsPerPageText="表示数"
+      ofText="/"
+      allText="全件"
+    >
+      <template slot="table-row" slot-scope="props">
+        <td> {{ props.row.originalIndex }} </td>
+        <td> {{ props.row['管轄'] }} </td>
+        <td>
+          {{ props.row['企業・事業場名称'] }}
+        </td>
+        <td> {{ props.row['所在地'] }} </td>
+        <td> {{ props.row['事案概要']|truncate(30) }} </td>
+      </template>
+    </vue-good-table>
   </div>
 </template>
 
 <script>
+import { VueGoodTable } from 'vue-good-table';
+
 export default {
   name: 'Index',
+  components: {
+    VueGoodTable,
+  },
   filters: {
     truncate(text, length) {
       if (text.length > length) {
@@ -41,12 +44,63 @@ export default {
     },
   },
   data() {
-    return {
-      msg: '全企業',
-      companies: this.$root.companies,
+    const companies = this.$root.companies;
+    const onlyUnique = function onlyUnique(value, index, self) {
+      return self.indexOf(value) === index;
     };
-  },
-  mounted() {
+
+    const filterOptions = companies.map(c => c['管轄'])
+      .filter(onlyUnique)
+      .map(value => ({
+        value,
+        text: value,
+      }));
+
+    const filterFunc = function filterFunc(data, filterString) {
+      return data.indexOf(filterString) > -1;
+    };
+
+    return {
+      msg: '',
+      companies,
+      columns: [
+        {
+          label: 'ID',
+        },
+        {
+          label: '管轄',
+          field: '管轄',
+          filterable: true,
+          filterDropdown: true,
+          filterOptions,
+          placeholder: '管轄',
+        },
+        {
+          label: '名称',
+          field: '企業・事業場名称',
+          filterable: true,
+          placeholder: '名称',
+          filter: filterFunc,
+        },
+        {
+          label: '所在地',
+          field: '所在地',
+          filterable: true,
+          placeholder: '所在地',
+          filter: filterFunc,
+        },
+        {
+          label: '事案概要',
+          field: '事案概要',
+          filterable: true,
+          placeholder: '事案概要',
+          filter: filterFunc,
+        },
+      ],
+      onClickFn(company) {
+        this.$router.push({ name: 'Detail', params: { id: company.originalIndex } });
+      },
+    };
   },
 };
 </script>
@@ -69,24 +123,8 @@ a {
 }
 table {
 }
-tbody {
-  display: block;
-  max-height: 600px;
-  overflow-y: scroll;
-}
-thead {
-  display: table;
-  table-layout: fixed;
-  width: 100%;
-}
-tr {
-  display: table;
-  table-layout: fixed;
+th {
   padding: 0.5em;
-  width: 100%;
-}
-tr.odd {
-  background-color: #f8f8f8;
 }
 td {
   padding: 0.5em;
