@@ -4,6 +4,11 @@
     <transition name="fade" mode="out-in" appear>
       <router-view :key="$route.fullPath"></router-view>
     </transition>
+    <footer>
+      <div class="footer">
+        powered by <a href="https://pages.github.com/">GitHub Pages</a>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -26,13 +31,16 @@ h1 {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding: 60px 20px 60px;
+  padding: 60px 20px 40px;
   margin-left: auto;
   margin-right: auto;
   width: 960px;
 }
 .page-title {
   margin: 0 0 80px;
+}
+.footer {
+  margin: 60px 0 0;
 }
 .fade-enter {
   opacity: 0;
