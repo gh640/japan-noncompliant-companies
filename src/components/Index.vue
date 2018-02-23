@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>{{ msg }}</h1>
     <table>
       <thead>
@@ -7,18 +7,21 @@
           <th>管轄</th>
           <th>企業・事業場名称</th>
           <th>所在地</th>
-          <th>公表日</th>
           <th>事案概要</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="company, index in this.$root.companies"
-            v-bind:key="index" v-bind:class="{ odd: (index % 2 == 1) }">
+        <tr v-for="(company, index) in companies"
+          v-bind:key="index"
+          v-bind:class="{ odd: (index % 2 == 1) }">
           <td> {{ company['管轄'] }} </td>
-          <td> {{ company['企業・事業場名称'] }} </td>
+          <td>
+            <router-link :to="{ name: 'Detail', params: { id: index } }">
+              {{ company['企業・事業場名称'] }}
+            </router-link>
+          </td>
           <td> {{ company['所在地'] }} </td>
-          <td> {{ company['公表日'] }} </td>
-          <td> {{ company['事案概要']|truncate(20) }} </td>
+          <td> {{ company['事案概要']|truncate(30) }} </td>
         </tr>
       </tbody>
     </table>
@@ -31,15 +34,16 @@ export default {
   filters: {
     truncate(text, length) {
       if (text.length > length) {
-        return text.substring(0, length - 3 ) + '...';
-      } else {
-        return text;
+        return `${text.substring(0, length - 3)}...`;
       }
-    }
+
+      return text;
+    },
   },
   data() {
     return {
       msg: '全企業',
+      companies: this.$root.companies,
     };
   },
   mounted() {
@@ -70,17 +74,21 @@ tbody {
   max-height: 600px;
   overflow-y: scroll;
 }
-thead,
+thead {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
 tr {
   display: table;
   table-layout: fixed;
+  padding: 0.5em;
   width: 100%;
 }
 tr.odd {
   background-color: #f8f8f8;
 }
-
 td {
-
+  padding: 0.5em;
 }
 </style>
