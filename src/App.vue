@@ -6,7 +6,7 @@
     </transition>
     <footer>
       <div class="footer">
-        powered by <a href="https://pages.github.com/">GitHub Pages</a>
+        powered by <a href="https://pages.github.com/"><img class="footer-link-image" src="../src/assets/GitHub-Mark-120px-plus.png" alt="GitHub Pages"></a>
       </div>
     </footer>
   </div>
@@ -41,6 +41,12 @@ h1 {
 }
 .footer {
   margin: 60px 0 0;
+}
+.footer-link-image {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  margin-left: 0.2em;
 }
 .fade-enter {
   opacity: 0;
