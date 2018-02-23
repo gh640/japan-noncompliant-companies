@@ -24,18 +24,23 @@
       </div>
     </div>
 
-    <h1>{{ msg }}</h1>
+    <div v-if="matched">
+      <h1>{{ msg }}</h1>
 
-    <table>
-      <tr v-if="company"
-        v-for="(column, index) in columns"
-        v-bind:key="index"
-        v-bind:class="{ odd: (index % 2 == 1) }">
-        <th>{{ column }}</th>
-        <td>{{ company[column] }}</td>
-      </tr>
-      <caption>公表日: {{ company['公表日'] }}</caption>
-    </table>
+      <table>
+        <tr v-if="company"
+          v-for="(column, index) in columns"
+          v-bind:key="index"
+          v-bind:class="{ odd: (index % 2 == 1) }">
+          <th>{{ column }}</th>
+          <td>{{ company[column] }}</td>
+        </tr>
+        <caption>公表日: {{ company['公表日'] }}</caption>
+      </table>
+    </div>
+    <div v-else>
+      <p>該当する企業が見つかりません</p>
+    </div>
   </div>
 </template>
 
@@ -44,17 +49,20 @@ export default {
   name: 'Detail',
   props: ['id'],
   watch: {
-    '$route' (to, from) {
+    $route(to, from) {
       this.companies = this.$root.companies;
       this.company = this.companies[this.id];
+      this.matched = !!this.company;
     },
   },
   mounted() {
     this.companies = this.$root.companies;
     this.company = this.companies[this.id];
+    this.matched = !!this.company;
   },
   data() {
     return {
+      matched: false,
       companies: [],
       company: {},
       columns: [
