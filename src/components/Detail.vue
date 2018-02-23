@@ -1,18 +1,27 @@
 <template>
   <div>
-    <div class="nav-next">
-      <router-link class="nav-next-prev"
-        v-if="companyPrevName"
-        v-bind:title="companyPrevName"
-        :to="{ name: 'Detail', params: { id: idPrev } }">
-        前
-      </router-link>
-      <router-link class="nav-next-next"
-        v-if="companyNextName"
-        v-bind:title="companyNextName"
-        :to="{ name: 'Detail', params: { id: idNext } }">
-        次
-      </router-link>
+    <div class="nav-index">
+      <div>
+        <router-link class="nav-next-prev"
+          v-if="companyPrevName"
+          v-bind:title="companyPrevName"
+          :to="{ name: 'Detail', params: { id: idPrev } }">
+          前
+        </router-link>
+      </div>
+
+      <div>
+        <router-link :to="{ name: 'Index' }">一覧へ</router-link>
+      </div>
+
+      <div>
+        <router-link class="nav-next-next"
+          v-if="companyNextName"
+          v-bind:title="companyNextName"
+          :to="{ name: 'Detail', params: { id: idNext } }">
+          次
+        </router-link>
+      </div>
     </div>
 
     <h1>{{ msg }}</h1>
@@ -27,10 +36,6 @@
       </tr>
       <caption>公表日: {{ company['公表日'] }}</caption>
     </table>
-
-    <div class="nav-index">
-      <router-link :to="{ name: 'Index' }">一覧へ</router-link>
-    </div>
   </div>
 </template>
 
@@ -119,16 +124,13 @@ td {
   text-align: left;
   padding: 0.5em;
 }
-.nav-next {
-  overflow: hidden;
-}
-.nav-next-prev {
-  float: left;
-}
-.nav-next-next {
-  float: right;
-}
 .nav-index {
+  display: flex;
+  justify-content: space-between;
   margin: 20px 0;
+}
+.nav-index-prev {
+}
+.nav-index-next {
 }
 </style>
