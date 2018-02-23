@@ -25,7 +25,7 @@
     </div>
 
     <div v-if="matched">
-      <h1>{{ msg }}</h1>
+      <h1 class="main-title">{{ msg }}</h1>
 
       <table>
         <tr v-if="company"
@@ -114,14 +114,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+.main-title {
+  margin: 40px 0;
 }
 a {
   color: #42b983;
 }
 table {
   width: 100%;
+  caption-side: bottom;
 }
 th {
   width: 20%;

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <h1>厚生労働省 ブラック企業リスト</h1>
-    <router-view/>
+    <h1 class="page-title">厚生労働省 ブラック企業リスト</h1>
+    <transition name="fade" mode="out-in" appear>
+      <router-view :key="$route.fullPath"></router-view>
+    </transition>
   </div>
 </template>
 
@@ -12,6 +14,12 @@ export default {
 </script>
 
 <style>
+h1 {
+  font-weight: normal;
+}
+.page-title {
+  font-weight: bold;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -22,5 +30,26 @@ export default {
   margin-left: auto;
   margin-right: auto;
   width: 960px;
+}
+.page-title {
+  margin: 0 0 80px;
+}
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: opacity .2s;
+}
+.fade-enter-to {
+  opacity: 1;
+}
+.fade-leave {
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
