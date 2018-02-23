@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <h1>厚生労働省 ブラック企業リスト</h1>
     <router-view/>
   </div>
 </template>
