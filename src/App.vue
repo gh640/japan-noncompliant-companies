@@ -34,7 +34,7 @@ h1 {
   padding: 60px 20px 40px;
   margin-left: auto;
   margin-right: auto;
-  width: 960px;
+  max-width: 960px;
 }
 .page-title {
   margin: 0 0 80px;
