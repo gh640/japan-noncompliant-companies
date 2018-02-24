@@ -10,8 +10,7 @@
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js",
-    "github-pages": "cp -r dist docs && touch docs/.nojekyll",
-    "preview": "http-server docs"
+    "github-pages": "cp -r dist docs && touch docs/.nojekyll"
   },
   "dependencies": {
     "vue": "^2.5.2",
