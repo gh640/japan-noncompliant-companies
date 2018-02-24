@@ -10,7 +10,8 @@
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js",
-    "github-pages": "cp -r dist docs"
+    "github-pages": "cp -r dist docs",
+    "preview": "http-server docs"
   },
   "dependencies": {
     "vue": "^2.5.2",
