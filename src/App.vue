@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1 class="page-title">厚生労働省 ブラック企業リスト</h1>
+    <h1 class="page-title"><router-link :to="{ name: 'Index' }">厚生労働省 ブラック企業リスト</router-link></h1>
     <transition name="fade" mode="out-in" appear>
       <router-view :key="$route.fullPath"></router-view>
     </transition>
@@ -24,6 +24,10 @@ h1 {
 }
 .page-title {
   font-weight: bold;
+}
+.page-title a {
+  text-decoration: none;
+  color: #2c3e50;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
