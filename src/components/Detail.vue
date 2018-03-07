@@ -55,6 +55,12 @@ export default {
       this.matched = !!this.company;
     },
   },
+  created() {
+    document.addEventListener('keyup', this.goNext);
+  },
+  destroyed() {
+    document.removeEventListener('keyup', this.goNext);
+  },
   mounted() {
     this.companies = this.$root.companies;
     this.company = this.companies[this.id];
@@ -107,6 +113,19 @@ export default {
       }
 
       return this.companies[this.idPrev]['企業・事業場名称'];
+    },
+  },
+  methods: {
+    goNext(e) {
+      const keys = {
+        ArrowLeft: this.idPrev,
+        ArrowRight: this.idNext,
+      };
+
+      if (keys[e.code] !== undefined) {
+        this.$router.push({ name: 'Detail', params: { id: keys[e.code] } });
+        e.preventDefault();
+      }
     },
   },
 };
