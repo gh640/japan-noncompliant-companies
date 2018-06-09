@@ -1,6 +1,6 @@
 <template>
   <div>
-    <select v-model="tsv">
+    <select class="tsv-selector" v-model="tsv">
       <option disabled value="">- 選択してください -</option>
       <option
         v-for="(tsvValue, tsvLabel) in tsvOptions"
@@ -155,6 +155,9 @@ li {
 }
 a {
   color: #42b983;
+}
+option.tsv-selector {
+  margin: 10px 0;
 }
 table.table {
 }
