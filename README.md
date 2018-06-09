@@ -96,6 +96,10 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
     - [vue](https://github.com/vuejs/vue)
     - [vue-router](https://github.com/vuejs/vue-router)
     - [vue-good-table](https://github.com/xaksis/vue-good-table)
+- データ管理
+    - [vuex](https://github.com/vuejs/vuex)
+- csv 処理
+    - [d3-fetch](https://github.com/d3/d3-fetch)
 - スキャフォールディング / バンドリング / トランスパイリング
     - [vue-cli](https://github.com/vuejs/vue-cli)
     - [webpack](https://github.com/webpack/webpack)
