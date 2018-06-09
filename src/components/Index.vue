@@ -40,9 +40,6 @@
 
 <script>
 import { VueGoodTable } from 'vue-good-table';
-import * as d3 from 'd3-fetch';
-
-const URL_PREFIX = 'https://raw.githubusercontent.com/gh640/japan-noncompliant-companies/master/data/';
 
 export default {
   name: 'Index',
@@ -61,7 +58,6 @@ export default {
   data() {
     return {
       msg: '',
-      tsv: '',
       tsvOptions: {
         '2017/02 - 2018/01': 'company_list_20170201_to_20180131.tsv',
       },
@@ -125,16 +121,14 @@ export default {
         },
       ];
     },
-  },
-  watch: {
-    tsv(tsv) {
-      const url = `${URL_PREFIX}${tsv}`;
-      d3.tsv(url)
-        .then((companies) => {
-          this.$store.commit('updateCompanies', companies);
-        })
-        .catch((error) => {
-        });
+    // `tsv` は Vuex の state と双方向にバインドする
+    tsv: {
+      get() {
+        return this.$store.state.tsv;
+      },
+      set(tsv) {
+        this.$store.commit('updateTsv', tsv);
+      },
     },
   },
   methods: {
