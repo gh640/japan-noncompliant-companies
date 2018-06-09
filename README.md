@@ -2,6 +2,8 @@
 
 厚生労働省が公開しているブラック企業の一覧です。
 
+![キャプチャ](https://raw.githubusercontent.com/gh640/japan-noncompliant-companies/master/assets/images/capture.png)
+
 正確には、次の基準で「送検事案」「局長指導事案」となった全国の事案を厚生労働省がまとめた表に掲載されている企業の一覧です。
 
 > ## 掲載する事案
@@ -32,6 +34,8 @@
 > 出典: [労働基準関係法令違反に係る公表事案のホームページ掲載について](http://www.mhlw.go.jp/kinkyu/dl/170510-02.pdf)
 
 - 繰り返しになりますが、本リストにあがっている企業は単に「送検事案」「局長指導事案」として公表されたものです。世の中には、世間に認知されていなくても顧客や従業員を食い物にする企業・反社会的な行為を行う事業者はたくさんあるので、このリストに載っている企業が最低最悪だというわけではありません（フォロー）。
+
+![キャプチャ](https://raw.githubusercontent.com/gh640/japan-noncompliant-companies/master/assets/images/capture.gif)
 
 
 ## 使用データ
