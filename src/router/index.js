@@ -6,6 +6,7 @@ import Detail from '@/components/Detail';
 Vue.use(Router);
 
 export default new Router({
+  base: window.location.pathname,
   mode: 'history',
   routes: [
     // インデックスビュー
