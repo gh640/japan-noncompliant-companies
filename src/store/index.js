@@ -31,7 +31,7 @@ export default new Vuex.Store({
         .then((companies) => {
           commit('updateCompanies', companies);
         })
-        .catch((error) => {
+        .catch(() => {
           // TODO エラーメッセージの処理を追加
         });
     },
