@@ -13,9 +13,11 @@
     "github-pages": "cp -r dist docs && touch docs/.nojekyll"
   },
   "dependencies": {
+    "d3-fetch": "^1.1.0",
     "vue": "^2.5.2",
     "vue-good-table": "^1.19.3",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
