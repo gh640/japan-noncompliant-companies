@@ -17,7 +17,7 @@
       :columns="columns"
       :rows="companies"
       :paginate="true"
-      :onClick="onClickFn"
+      :onClick="showDetail"
       styleClass="table table-bordered table-striped"
       nextText="次"
       prevText="前"
@@ -64,9 +64,6 @@ export default {
       tsv: '',
       tsvOptions: {
         '2017/02 - 2018/01': 'company_list_20170201_to_20180131.tsv',
-      },
-      onClickFn(company) {
-        this.$router.push({ name: 'Detail', params: { id: company.originalIndex } });
       },
     };
   },
@@ -138,6 +135,11 @@ export default {
         })
         .catch((error) => {
         });
+    },
+  },
+  methods: {
+    showDetail(company) {
+      this.$router.push({ name: 'Detail', params: { id: company.originalIndex } });
     },
   },
 };
