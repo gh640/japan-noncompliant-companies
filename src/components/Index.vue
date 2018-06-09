@@ -1,6 +1,18 @@
 <template>
   <div>
+    <select v-model="tsv">
+      <option disabled value="">- 選択してください -</option>
+      <option
+        v-for="(tsvValue, tsvLabel) in tsvOptions"
+        :key="tsvValue"
+        :value="tsvValue"
+      >
+        {{ tsvLabel }}
+      </option>
+    </select>
+
     <h1 class="main-title">{{ msg }}</h1>
+
     <vue-good-table
       :columns="columns"
       :rows="companies"
@@ -28,6 +40,9 @@
 
 <script>
 import { VueGoodTable } from 'vue-good-table';
+import * as d3 from 'd3-fetch';
+
+const URL_PREFIX = 'https://raw.githubusercontent.com/gh640/japan-noncompliant-companies/master/data/';
 
 export default {
   name: 'Index',
@@ -44,26 +59,38 @@ export default {
     },
   },
   data() {
-    const companies = this.$root.companies;
-    const onlyUnique = function onlyUnique(value, index, self) {
-      return self.indexOf(value) === index;
-    };
-
-    const filterOptions = companies.map(c => c['管轄'])
-      .filter(onlyUnique)
-      .map(value => ({
-        value,
-        text: value,
-      }));
-
-    const filterFunc = function filterFunc(data, filterString) {
-      return data.indexOf(filterString) > -1;
-    };
-
     return {
       msg: '',
-      companies,
-      columns: [
+      tsv: '',
+      tsvOptions: {
+        '2017/02 - 2018/01': 'company_list_20170201_to_20180131.tsv',
+      },
+      onClickFn(company) {
+        this.$router.push({ name: 'Detail', params: { id: company.originalIndex } });
+      },
+    };
+  },
+  computed: {
+    companies() {
+      return this.$store.state.companies;
+    },
+    columns() {
+      const onlyUnique = function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+      };
+
+      const filterOptions = this.companies.map(c => c['管轄'])
+        .filter(onlyUnique)
+        .map(value => ({
+          value,
+          text: value,
+        }));
+
+      const filterFunc = function filterFunc(data, filterString) {
+        return data.indexOf(filterString) > -1;
+      };
+
+      return [
         {
           label: 'ID',
         },
@@ -99,11 +126,19 @@ export default {
           filter: filterFunc,
           width: '40%',
         },
-      ],
-      onClickFn(company) {
-        this.$router.push({ name: 'Detail', params: { id: company.originalIndex } });
-      },
-    };
+      ];
+    },
+  },
+  watch: {
+    tsv(tsv) {
+      const url = `${URL_PREFIX}${tsv}`;
+      d3.tsv(url)
+        .then((companies) => {
+          this.$store.commit('updateCompanies', companies);
+        })
+        .catch((error) => {
+        });
+    },
   },
 };
 </script>

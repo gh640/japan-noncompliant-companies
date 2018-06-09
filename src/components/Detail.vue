@@ -49,11 +49,7 @@ export default {
   name: 'Detail',
   props: ['id'],
   watch: {
-    $route() {
-      this.companies = this.$root.companies;
-      this.company = this.companies[this.id];
-      this.matched = !!this.company;
-    },
+    $route() {},
   },
   created() {
     document.addEventListener('keyup', this.goNext);
@@ -61,16 +57,9 @@ export default {
   destroyed() {
     document.removeEventListener('keyup', this.goNext);
   },
-  mounted() {
-    this.companies = this.$root.companies;
-    this.company = this.companies[this.id];
-    this.matched = !!this.company;
-  },
+  mounted() {},
   data() {
     return {
-      matched: false,
-      companies: [],
-      company: {},
       columns: [
         '管轄',
         '所在地',
@@ -113,6 +102,15 @@ export default {
       }
 
       return this.companies[this.idPrev]['企業・事業場名称'];
+    },
+    companies() {
+      return this.$store.state.companies;
+    },
+    company() {
+      return this.companies[this.id];
+    },
+    matched() {
+      return !!this.company;
     },
   },
   methods: {
