@@ -10,7 +10,7 @@
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js",
-    "github-pages": "cp -r dist docs && touch docs/.nojekyll"
+    "github-pages": "rm -rf docs && cp -r dist docs && touch docs/.nojekyll"
   },
   "dependencies": {
     "d3-fetch": "^1.1.0",
