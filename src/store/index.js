@@ -27,8 +27,5 @@ export default new Vuex.Store({
           // TODO エラーメッセージの処理を追加
         });
     },
-    updateCompanies(state, companies) {
-      state.companies = companies;
-    },
   },
 });
