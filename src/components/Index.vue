@@ -134,7 +134,7 @@ export default {
         return this.$store.state.tsv;
       },
       set(tsv) {
-        this.$store.commit('updateTsv', tsv);
+        this.$store.dispatch('updateTsv', tsv);
       },
     },
   },

@@ -16,12 +16,20 @@ export default new Vuex.Store({
   mutations: {
     updateTsv(state, tsv) {
       state.tsv = tsv;
+    },
+    updateCompanies(state, companies) {
+      state.companies = companies;
+    },
+  },
+  actions: {
+    updateTsv({ commit }, tsv) {
+      commit('updateTsv', tsv);
 
       // GitHub の tsv をフェッチする
       const url = `${URL_PREFIX}${tsv}`;
       d3.tsv(url)
         .then((companies) => {
-          state.companies = companies;
+          commit('updateCompanies', companies);
         })
         .catch((error) => {
           // TODO エラーメッセージの処理を追加
