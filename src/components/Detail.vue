@@ -4,7 +4,7 @@
       <div>
         <router-link class="nav-next-prev"
           v-if="companyPrevName"
-          v-bind:title="companyPrevName"
+          :title="companyPrevName"
           :to="{ name: 'Detail', params: { id: idPrev } }">
           前
         </router-link>
@@ -17,7 +17,7 @@
       <div>
         <router-link class="nav-next-next"
           v-if="companyNextName"
-          v-bind:title="companyNextName"
+          :title="companyNextName"
           :to="{ name: 'Detail', params: { id: idNext } }">
           次
         </router-link>
@@ -30,8 +30,8 @@
       <table>
         <tr v-if="company"
           v-for="(column, index) in columns"
-          v-bind:key="index"
-          v-bind:class="{ odd: (index % 2 == 1) }">
+          :key="index"
+          :class="{ odd: (index % 2 == 1) }">
           <th>{{ column }}</th>
           <td>{{ company[column] }}</td>
         </tr>
