@@ -48,7 +48,7 @@
 
 - [GitHub - nyampire/jp_labor_act_illegal_list: TSV dataset of illegal companies from Ministry of Health, Labour and Welfare, Japan](https://github.com/nyampire/jp_labor_act_illegal_list)
 
-その中の tsv ファイル `company_list_20170201_to_20180131.tsv` を使用させていただいています。
+その中の tsv ファイルを使用させていただいています。
 
 
 ## 参考
