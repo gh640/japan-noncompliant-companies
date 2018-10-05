@@ -9,6 +9,7 @@ const TSV_OPTIONS = {
   '2017/05 - 2018/04': 'company_list_20170501_to_20180430.tsv',
   '2017/06 - 2018/05': 'company_list_20170601_to_20180531.tsv',
   '2017/07 - 2018/06': 'company_list_20170701_to_20180630.tsv',
+  '2017/08 - 2018/07': 'company_list_20170801_to_20180731.tsv',
 };
 
 export default {
